@@ -59,13 +59,7 @@ export default function MyApp({ file }) {
   }, [])
 
 
-  useEffect(() => {
-    // console.log(ref.current.clientHeight)
-    // console.log(ref.current.clientWidth);
 
-    setWidth(ref.current.clientWidth);
-    setHeight(ref.current.clientHeight);
-  }, [pageNumber]);
 
   useEffect(() => {
     console.log("Editor has changed")
@@ -108,9 +102,8 @@ export default function MyApp({ file }) {
   return (
     <PdfWrapper id="hello">
       {canvasArray.map((value, key) => {
-        if (value == pageNumber && editorSettings) {
-          return <DrawingTool key={key} height={height} width={width} settings={editorSettings}/>
-        };
+        console.log('Ive run');
+        return <DrawingTool key={key} height={ref.current.clientWidth} width={ref.current.clientWidth} settings={editorSettings} visible={value == pageNumber ? 'visible' : null} />
       })}
       <DocumentWrapper ref={ref} >
         <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>

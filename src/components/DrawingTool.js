@@ -16,7 +16,7 @@ const DrawingToolWrapper = styled.div`
 `;
 
 
-const DrawingTool = ({ height, width, settings }) => {
+const DrawingTool = ({ height, width, settings, visible }) => {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -42,8 +42,7 @@ const DrawingTool = ({ height, width, settings }) => {
     const context = contextRef.current;
     context.strokeStyle = `rgba(${settings.strokeColor.r}, ${settings.strokeColor.g}, ${settings.strokeColor.b}, ${settings.strokeColor.a})`;
     context.lineWidth = settings.lineWidth;
-    console.log("ello")
-    console.log(context);
+
   })
 
 
@@ -69,7 +68,7 @@ const DrawingTool = ({ height, width, settings }) => {
   };
 
   return (
-      <DrawingToolWrapper>
+      <DrawingToolWrapper className={visible ? 'visible' : 'invisible'}>
         <canvas
           id="canvas"
           ref={canvasRef}

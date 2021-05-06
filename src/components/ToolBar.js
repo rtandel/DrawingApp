@@ -34,7 +34,7 @@ function reducer(state, action) {
       return {...state, lineWidth: state.lineWidth - 1};
     case 'setStrokeColor':
       console.log("We made it")
-      return {...state, strokeColor: action.color}
+      return {...state, eraser: false, strokeColor: action.color}
     case 'setEraser':
       return {...state, eraser: !state.eraser}
     default:
@@ -59,6 +59,7 @@ export default function ToolBar({ setEditorValues }) {
         color={state.strokeColor}
         onChangeComplete={(e) => {
           console.log(e);
+
           dispatch({type: 'setStrokeColor', color: e.rgb })
         }}
         

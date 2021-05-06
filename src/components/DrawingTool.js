@@ -19,7 +19,6 @@ const DrawingTool = ({ height, width, settings, visible }) => {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [editorSettings, setEditorSettings] = useState()
 
 
   useEffect(() => {

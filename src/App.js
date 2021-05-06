@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import logo from "./logo.svg";
 import PDF from "./components/PDF";
-import Annotator from "./components/Annotator";
-import DrawingTool from './components/DrawingTool';
 import styled from "styled-components";
 
 
 const Wrapper = styled.div`
   height: auto;
+  width: 85%;
   margin: 0 auto;
   text-align: center;
   

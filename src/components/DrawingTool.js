@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import ToolBar from "./ToolBar";
 import styled from "styled-components";
 
 const DrawingToolWrapper = styled.div`
@@ -50,6 +49,11 @@ const DrawingTool = ({ height, width, settings, visible }) => {
 
   const beginDraw = ({ nativeEvent }) => {
     const { offsetX, offsetY } = nativeEvent;
+    if (settings.eraser) {
+      contextRef.current.globalCompositeOperation = 'destination-out';
+    } else {
+      contextRef.current.globalCompositeOperation = 'source-over'
+    }
     contextRef.current.beginPath();
     contextRef.current.moveTo(offsetX, offsetY);
     setIsDrawing(true);
@@ -59,6 +63,7 @@ const DrawingTool = ({ height, width, settings, visible }) => {
     if (!isDrawing) return;
     const { offsetX, offsetY } = nativeEvent;
     contextRef.current.lineTo(offsetX, offsetY);
+
     contextRef.current.stroke();
   };
 

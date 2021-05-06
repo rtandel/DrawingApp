@@ -10,13 +10,17 @@ const PdfWrapper = styled.div`
   display: flex;
   height: 100%;
   justify-content: space-between;
+
+  color: #fff;
+
+
   .react-pdf__Page__annotations {
     display: none;
   }
 
-  .react-pdf__Document
-  ,.react-pdf__Page__canvas {
-    width: 700px !important;
+  .react-pdf__Document,
+  .react-pdf__Page__canvas {
+    width: 789px !important;
     height: 792px !important;
   }
 `;
@@ -24,15 +28,15 @@ const PdfWrapper = styled.div`
 const ControlsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 25%;
   height: auto;
+
+  & button {
+    color: #9F514A;
+    padding: 10px;
+  }
 `;
 
 const DocumentWrapper = styled.div`
-  display: block;
-  witdth: 100%;
-  height: auto;
-  border: 2px solid black;
 `;
 
 let initialHeight = 250;
@@ -45,8 +49,8 @@ export default function MyApp({ file }) {
   const [height, setHeight] = useState(initialHeight);
   const [width, setWidth] = useState(initialWidth);
   const [editorSettings, setEditorSettings] = useState({
-    strokeColor: '#000000',
-    lineWidth: 5
+    strokeColor: "#000000",
+    lineWidth: 5,
   });
   const ref = useRef();
 
@@ -56,15 +60,11 @@ export default function MyApp({ file }) {
     console.log(ref.current);
     setWidth(ref.current.clientWidth);
     setHeight(ref.current.clientHeight);
-  }, [])
-
-
-
+  }, []);
 
   useEffect(() => {
-    console.log("Editor has changed")
-  }, [editorSettings])
-
+    console.log("Editor has changed");
+  }, [editorSettings]);
 
   function onDocumentLoadSuccess({ numPages }) {
     generateCanvas(numPages);
@@ -96,26 +96,41 @@ export default function MyApp({ file }) {
   }
 
   function setEditorValues(state) {
+    console.log(state);
     setEditorSettings(state);
   }
 
   return (
     <PdfWrapper id="hello">
       {canvasArray.map((value, key) => {
-        console.log('Ive run');
-        return <DrawingTool key={key} height={ref.current.clientWidth} width={ref.current.clientWidth} settings={editorSettings} visible={value == pageNumber ? 'visible' : null} />
+        console.log("Ive run");
+        return (
+          <DrawingTool
+            key={key}
+            height={ref.current.clientWidth}
+            width={ref.current.clientWidth}
+            settings={editorSettings}
+            visible={value == pageNumber ? "visible" : null}
+          />
+        );
       })}
-      <DocumentWrapper ref={ref} >
+      <DocumentWrapper ref={ref}>
         <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
           <Page pageNumber={pageNumber} />
         </Document>
       </DocumentWrapper>
       <ControlsWrapper>
-        <p>
-          Page {pageNumber} of {numPages}
-        </p>
-        <button onClick={previousPage}>Previous</button>
-        <button onClick={nextPage}>Next Page</button>
+        <div className="increment_decrement">
+          <button onClick={previousPage}>
+            {'<'}
+          </button>
+          <p>
+            Page {pageNumber} of {numPages}
+          </p>
+          <button onClick={nextPage}>
+            {'>'}
+          </button>
+        </div>
         <ToolBar setEditorValues={setEditorValues} />
       </ControlsWrapper>
     </PdfWrapper>

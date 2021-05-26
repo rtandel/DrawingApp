@@ -33,7 +33,6 @@ function reducer(state, action) {
     case 'decrement':
       return {...state, lineWidth: state.lineWidth - 1};
     case 'setStrokeColor':
-      console.log("We made it")
       return {...state, eraser: false, strokeColor: action.color}
     case 'setEraser':
       return {...state, eraser: !state.eraser}

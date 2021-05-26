@@ -56,13 +56,11 @@ export default function MyApp({ file }) {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
   useEffect(() => {
-    console.log(ref.current);
     setWidth(ref.current.clientWidth);
     setHeight(ref.current.clientHeight);
   }, []);
 
   useEffect(() => {
-    console.log("Editor has changed");
   }, [editorSettings]);
 
   function onDocumentLoadSuccess({ numPages }) {
@@ -95,14 +93,12 @@ export default function MyApp({ file }) {
   }
 
   function setEditorValues(state) {
-    console.log(state);
     setEditorSettings(state);
   }
 
   return (
     <PdfWrapper id="hello">
       {canvasArray.map((value, key) => {
-        console.log("Ive run");
         return (
           <DrawingTool
             key={key}

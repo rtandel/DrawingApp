@@ -44,7 +44,6 @@ function reducer(state, action) {
 
 
 export default function ToolBar({ setEditorValues }) {
-  const [show, setShow] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -54,22 +53,15 @@ export default function ToolBar({ setEditorValues }) {
 
   return (
     <ToolbarWrapper>
-      {show ? 
+  
         <SketchPicker
         color={state.strokeColor}
         onChangeComplete={(e) => {
           console.log(e);
 
           dispatch({type: 'setStrokeColor', color: e.rgb })
-        }}
-        
-      /> 
-      : 
-      null}
+        }} /> 
 
-      <button onClick={(e) => {
-       
-      }}>Choose Color</button>
 
       <div className="increment_decrement">
         <button onClick={() => dispatch({type: 'decrement' })}>

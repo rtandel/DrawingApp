@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import logo from "./logo.svg";
 import PDF from "./components/PDF";
 import styled from "styled-components";
@@ -14,17 +14,10 @@ const Wrapper = styled.div`
 
 function App() {
   const [file, setFile] = useState('/canon.pdf');
-  const [totalPages, setTotalPages] = useState(1);
-
-
-  function setTotal(e) {
-    console.log(e)
-    setTotalPages(e);
-  }
+  const inputFile = useRef(null)
 
   return (
     <Wrapper className="App">
-      
       <PDF file={file} />
     </Wrapper>
   );

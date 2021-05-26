@@ -14,12 +14,10 @@ const DrawingToolWrapper = styled.div`
   }
 `;
 
-
 const DrawingTool = ({ height, width, settings, visible }) => {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
-
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -36,22 +34,17 @@ const DrawingTool = ({ height, width, settings, visible }) => {
   }, []);
 
   useEffect(() => {
-    
     const context = contextRef.current;
     context.strokeStyle = `rgba(${settings.strokeColor.r}, ${settings.strokeColor.g}, ${settings.strokeColor.b}, ${settings.strokeColor.a})`;
     context.lineWidth = settings.lineWidth;
-
-  })
-
-
-
+  });
 
   const beginDraw = ({ nativeEvent }) => {
     const { offsetX, offsetY } = nativeEvent;
     if (settings.eraser) {
-      contextRef.current.globalCompositeOperation = 'destination-out';
+      contextRef.current.globalCompositeOperation = "destination-out";
     } else {
-      contextRef.current.globalCompositeOperation = 'source-over'
+      contextRef.current.globalCompositeOperation = "source-over";
     }
     contextRef.current.beginPath();
     contextRef.current.moveTo(offsetX, offsetY);
@@ -72,16 +65,16 @@ const DrawingTool = ({ height, width, settings, visible }) => {
   };
 
   return (
-      <DrawingToolWrapper className={visible ? 'visible' : 'invisible'}>
-        <canvas
-          id="canvas"
-          ref={canvasRef}
-          onMouseDown={beginDraw}
-          onMouseUp={finishDraw}
-          onMouseMove={draw}
-          onMouseOut={finishDraw}
-        ></canvas>
-      </DrawingToolWrapper>
+    <DrawingToolWrapper className={visible ? "visible" : "invisible"}>
+      <canvas
+        id="canvas"
+        ref={canvasRef}
+        onMouseDown={beginDraw}
+        onMouseUp={finishDraw}
+        onMouseMove={draw}
+        onMouseOut={finishDraw}
+      ></canvas>
+    </DrawingToolWrapper>
   );
 };
 

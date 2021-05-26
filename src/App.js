@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 function App() {
-  const [file, setFile] = useState('/canon.pdf');
+  const [file, setFile] = useState('/rajen.pdf');
   const inputFile = useRef(null)
 
   return (
